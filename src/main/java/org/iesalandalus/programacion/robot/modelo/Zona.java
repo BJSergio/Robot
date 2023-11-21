@@ -22,21 +22,16 @@ public record Zona(int ancho, int alto) {
 
     private void validarAncho(int ancho) {
 
-        if (ancho < ANCHO_MINIMO) {
-            throw new IllegalArgumentException("ERROR: El ancho introducido es menor que el mínimo mínimo.");
+        if (ancho < ANCHO_MINIMO || ancho > ANCHO_MAXIMO) {
+            throw new IllegalArgumentException("Ancho no válido.");
         }
-        if (ancho > ANCHO_MAXIMO) {
-            throw new IllegalArgumentException("ERROR: El ancho introducido es mayor que el máximo permitido.");
-        }
+
     }
 
     private void validarAlto(int alto) {
 
-        if (alto < ALTO_MINIMO) {
-            throw new IllegalArgumentException("ERROR: El alto introducido es menor que el mínimo permitido.");
-        }
-        if (alto > ALTO_MAXIMO) {
-            throw new IllegalArgumentException("ERROR: El alto introducido es mayor que el máximo permitido.");
+        if (alto < ALTO_MINIMO || alto > ALTO_MAXIMO) {
+            throw new IllegalArgumentException("Alto no válido.");
         }
     }
 
@@ -47,17 +42,17 @@ public record Zona(int ancho, int alto) {
 
     public boolean pertenece(Coordenada coordenada) {
 
-        Objects.requireNonNull(coordenada, "ERROR: La coordenada no puede ser nula.");
+        Objects.requireNonNull(coordenada, "La coordenada no puede ser nula.");
         return (perteneceX(coordenada.x()) && perteneceY(coordenada.y()));
     }
 
     private boolean perteneceX(int x) {
 
-        return (x < ANCHO_MINIMO || x > ANCHO_MAXIMO);
+        return (x >= 0 && x < ancho);
     }
 
     private boolean perteneceY(int y) {
 
-        return (y < ALTO_MINIMO || y > ANCHO_MAXIMO);
+        return (y >= 0 && y < alto);
     }
 }
