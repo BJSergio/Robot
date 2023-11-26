@@ -20,6 +20,7 @@ public class Consola {
         System.out.println("2.Controlar un robot indicando su zona.");
         System.out.println("3.Controlar un robot indicando su zona y orientación");
         System.out.println("4.Controlar un robot indicando su zona, orientación y coordenada");
+        System.out.println("5.Salir");
     }
 
     public static int elegirOpcion() {
@@ -43,7 +44,7 @@ public class Consola {
         System.out.print("Introduce el ancho de la zona:");
         ancho = Entrada.entero();
 
-        System.out.println("Introduce el alto de la zona:");
+        System.out.print("Introduce el alto de la zona:");
         alto = Entrada.entero();
 
         try {
@@ -85,13 +86,13 @@ public class Consola {
             case 5 -> orientacionElegida = Orientacion.SUROESTE;
             case 6 -> orientacionElegida = Orientacion.OESTE;
             case 7 -> orientacionElegida = Orientacion.NOROESTE;
-            default -> throw new IllegalArgumentException("Orientación no válida.");
+            default -> throw new IllegalArgumentException("No se ha elegido ninguna orientación.");
         }
 
         return orientacionElegida;
     }
 
-    public static Coordenada elegirCoordenada() {
+    public static Coordenada elegirCoordenada() throws OperationNotSupportedException {
 
         int coordenadaX;
         int coordenadaY;
@@ -104,7 +105,7 @@ public class Consola {
         try {
             return new Coordenada(coordenadaX, coordenadaY);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("No se ha podido crear la coordenada.");
+            throw new OperationNotSupportedException("No se ha podido crear la coordenada.");
         }
     }
 
@@ -118,7 +119,7 @@ public class Consola {
 
     public static void mostrarRobot(ControladorRobot controladorRobot) {
 
-        if (controladorRobot != null) {
+        if (controladorRobot.getRobot() != null) {
 
             System.out.println(controladorRobot.getRobot());
         } else {
