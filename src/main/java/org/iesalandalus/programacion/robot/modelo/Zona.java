@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public record Zona(int ancho, int alto) {
 
-    public static final int ANCHO_MINIMO = 10;
-    public static final int ANCHO_MAXIMO = 100;
-    public static final int ALTO_MINIMO = 10;
-    public static final int ALTO_MAXIMO = 100;
+    private static final int ANCHO_MINIMO = 10;
+    private static final int ANCHO_MAXIMO = 100;
+    private static final int ALTO_MINIMO = 10;
+    private static final int ALTO_MAXIMO = 100;
 
-    public Zona {
+    public Zona { // Constructor canónico
 
         validarAncho(ancho);
         validarAlto(alto);
@@ -54,5 +54,10 @@ public record Zona(int ancho, int alto) {
     private boolean perteneceY(int y) {
 
         return (y >= 0 && y < alto);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[ancho=%d, alto=%d]", ancho, alto);
     }
 }

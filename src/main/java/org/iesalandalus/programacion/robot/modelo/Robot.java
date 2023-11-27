@@ -10,20 +10,20 @@ public class Robot {
     private Zona zona;
 
     public Robot() {
-        this.zona = new Zona();
-        this.coordenada = zona.getCentro();
-        this.orientacion = Orientacion.NORTE;
+        zona = new Zona();
+        coordenada = zona.getCentro();
+        orientacion = Orientacion.NORTE;
     }
 
     public Robot(Zona zona) {
         setZona(zona);
-        this.coordenada = zona.getCentro();
-        this.orientacion = Orientacion.NORTE;
+        coordenada = zona.getCentro();
+        orientacion = Orientacion.NORTE;
     }
 
     public Robot(Zona zona, Orientacion orientacion) {
         setZona(zona);
-        this.coordenada = zona.getCentro();
+        coordenada = zona.getCentro();
         setOrientacion(orientacion);
     }
 
@@ -106,30 +106,29 @@ public class Robot {
 
     public void girarALaDerecha() {
 
-        switch (orientacion) {
-            case NORTE -> orientacion = Orientacion.NORESTE;
-            case NORESTE -> orientacion = Orientacion.ESTE;
-            case ESTE -> orientacion = Orientacion.SURESTE;
-            case SURESTE -> orientacion = Orientacion.SUR;
-            case SUR -> orientacion = Orientacion.SUROESTE;
-            case SUROESTE -> orientacion = Orientacion.OESTE;
-            case OESTE -> orientacion = Orientacion.NOROESTE;
-            case NOROESTE -> orientacion = Orientacion.NORTE;
-        }
+        orientacion = switch (orientacion) {
+            case NORTE -> Orientacion.NORESTE;
+            case NORESTE -> Orientacion.ESTE;
+            case ESTE -> Orientacion.SURESTE;
+            case SURESTE -> Orientacion.SUR;
+            case SUR -> Orientacion.SUROESTE;
+            case SUROESTE -> Orientacion.OESTE;
+            case OESTE -> Orientacion.NOROESTE;
+            case NOROESTE -> Orientacion.NORTE;
+        };
     }
 
     public void girarALaIzquierda() {
-
-        switch (orientacion) {
-            case NORTE -> orientacion = Orientacion.NOROESTE;
-            case NORESTE -> orientacion = Orientacion.NORTE;
-            case ESTE -> orientacion = Orientacion.NORESTE;
-            case SURESTE -> orientacion = Orientacion.ESTE;
-            case SUR -> orientacion = Orientacion.SURESTE;
-            case SUROESTE -> orientacion = Orientacion.SUR;
-            case OESTE -> orientacion = Orientacion.SUROESTE;
-            case NOROESTE -> orientacion = Orientacion.OESTE;
-        }
+        orientacion = switch (orientacion) {
+            case NORTE -> Orientacion.NOROESTE;
+            case NORESTE -> Orientacion.NORTE;
+            case ESTE -> Orientacion.NORESTE;
+            case SURESTE -> Orientacion.ESTE;
+            case SUR -> Orientacion.SURESTE;
+            case SUROESTE -> Orientacion.SUR;
+            case OESTE -> Orientacion.SUROESTE;
+            case NOROESTE -> Orientacion.OESTE;
+        };
     }
 
     @Override
@@ -146,10 +145,6 @@ public class Robot {
 
     @Override
     public String toString() {
-        return "Robot{" +
-                "orientacion=" + orientacion +
-                ", coordenada=" + coordenada +
-                ", zona=" + zona +
-                '}';
+        return String.format("Robot {Orientacion=%s, Coordenada=%s, Zona= %s}", orientacion, coordenada, zona);
     }
 }
