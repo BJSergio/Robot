@@ -5,6 +5,7 @@ import org.iesalandalus.programacion.robot.modelo.Robot;
 import org.iesalandalus.programacion.robot.vista.Consola;
 
 import javax.naming.OperationNotSupportedException;
+import java.util.Objects;
 
 public class Main {
 
@@ -55,6 +56,8 @@ public class Main {
     }
 
     private static void ejecutarComando() {
+
+        Objects.requireNonNull(controladorRobot, "Aún no se ha creado ningún robot.");
 
         try {
             controladorRobot.ejecutar(Consola.elegirComando());
