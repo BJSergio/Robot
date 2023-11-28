@@ -21,7 +21,6 @@ public class Main {
                 ejecutarOpcion(opcionElegida);
                 Consola.mostrarRobot(controladorRobot);
             }
-
         } while (opcionElegida != 6);
         Consola.despedirse();
     }

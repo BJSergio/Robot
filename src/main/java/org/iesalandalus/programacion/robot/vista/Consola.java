@@ -14,13 +14,12 @@ public class Consola {
     public static void mostrarMenuPrincipal() {
         System.out.println("Programa para controlar un robot mediante comandos.");
         System.out.println("---------------------------------------------------");
-        System.out.println();
         System.out.println("1.- Controlar un robot por defecto.");
         System.out.println("2.- Controlar un robot indicando su zona.");
         System.out.println("3.- Controlar un robot indicando su zona y orientación.");
         System.out.println("4.- Controlar un robot indicando su zona, orientación y coordenada inicial.");
         System.out.println("5.- Ejecutar comando.");
-        System.out.println("6.- Salir");
+        System.out.println("6.- Salir.");
     }
 
     public static int elegirOpcion() {
@@ -47,8 +46,13 @@ public class Consola {
         System.out.print("Introduce el alto de la zona:");
         alto = Entrada.entero();
 
-        return new Zona(ancho, alto);
+        // Puede lanzar una excepción
 
+        try {
+            return new Zona(ancho, alto);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("ERROR: " + e.getMessage());
+        }
     }
 
     public static void mostrarOrientacion() {

@@ -145,6 +145,6 @@ public class Robot {
 
     @Override
     public String toString() {
-        return String.format("Robot {Orientacion=%s, Coordenada=%s, Zona= %s}", orientacion, coordenada, zona);
+        return String.format("Robot {Orientacion=%s, Coordenada=%s, Zona=%s}", orientacion, coordenada, zona);
     }
 }
