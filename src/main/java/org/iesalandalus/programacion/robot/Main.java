@@ -8,7 +8,6 @@ import javax.naming.OperationNotSupportedException;
 import java.util.Objects;
 
 public class Main {
-
     private static ControladorRobot controladorRobot;
 
     public static void main(String[] args) {
@@ -17,6 +16,7 @@ public class Main {
 
         do {
             opcionElegida = Consola.elegirOpcion();
+
             if (opcionElegida != 6) {
                 ejecutarOpcion(opcionElegida);
                 Consola.mostrarRobot(controladorRobot);
@@ -55,11 +55,10 @@ public class Main {
     }
 
     private static void ejecutarComando() {
-
         Objects.requireNonNull(controladorRobot, "Aún no se ha creado ningún robot.");
 
         try {
-            controladorRobot.ejecutar(Consola.elegirComando());
+            controladorRobot.ejecutarSecuenciaComandos(Consola.elegirSecuencia());
         } catch (OperationNotSupportedException e) {
             System.out.println((e.getMessage()));
         }

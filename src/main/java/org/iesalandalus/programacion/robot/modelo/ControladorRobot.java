@@ -3,28 +3,30 @@ package org.iesalandalus.programacion.robot.modelo;
 import javax.naming.OperationNotSupportedException;
 import java.util.Objects;
 
-public class ControladorRobot {
-    private final Robot robot;
+public record ControladorRobot(Robot robot) {
 
     public ControladorRobot(Robot robot) {
         Objects.requireNonNull(robot, "El robot no puede ser nulo.");
         this.robot = new Robot(robot); // Para evitar el aliasing creamos una copia del robot
     }
 
-    public Robot getRobot() {
+    @Override
+    public Robot robot() {
         return new Robot(robot);
     }
 
-    public void ejecutar(char comando) throws OperationNotSupportedException {
+    public void ejecutarSecuenciaComandos(String comandos) throws OperationNotSupportedException {
 
-        if (comando == 'A' || comando == 'a') {
-            robot.avanzar();
-        } else if (comando == 'D' || comando == 'd') {
-            robot.girarALaDerecha();
-        } else if (comando == 'I' || comando == 'i') {
-            robot.girarALaIzquierda();
-        } else {
-            throw new OperationNotSupportedException("Comando desconocido.");
+        for (int i = 0; i < comandos.length(); i++) {
+            if (comandos.charAt(i) == 'a' || comandos.charAt(i) == 'A') {
+                robot.avanzar();
+            } else if (comandos.charAt(i) == 'd' || comandos.charAt(i) == 'D') {
+                robot.girarALaDerecha();
+            } else if (comandos.charAt(i) == 'i' || comandos.charAt(i) == 'I') {
+                robot.girarALaIzquierda();
+            } else {
+                throw new OperationNotSupportedException("Comando desconocido.");
+            }
         }
     }
 }

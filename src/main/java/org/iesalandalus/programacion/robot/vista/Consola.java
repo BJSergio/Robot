@@ -6,19 +6,23 @@ import org.iesalandalus.programacion.robot.modelo.Orientacion;
 import org.iesalandalus.programacion.robot.modelo.Zona;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
+
 public class Consola {
+
+    private static final String ER_COMANDO = "[A-a]+|[D-d]+|[I-i]+";
 
     private Consola() {
     }
 
     public static void mostrarMenuPrincipal() {
+
         System.out.println("Programa para controlar un robot mediante comandos.");
-        System.out.println("---------------------------------------------------");
+        System.out.println("-------------------------------------------------");
         System.out.println("1.- Controlar un robot por defecto.");
         System.out.println("2.- Controlar un robot indicando su zona.");
         System.out.println("3.- Controlar un robot indicando su zona y orientación.");
         System.out.println("4.- Controlar un robot indicando su zona, orientación y coordenada inicial.");
-        System.out.println("5.- Ejecutar comando.");
+        System.out.println("5.- Ejecutar secuencia de comandos.");
         System.out.println("6.- Salir.");
     }
 
@@ -106,19 +110,19 @@ public class Consola {
         return new Coordenada(coordenadaX, coordenadaY);
     }
 
-    public static char elegirComando() {
+    public static String elegirSecuencia() {
 
-        System.out.print("Introduce un comando a ejecutar:");
-        return Entrada.caracter();
+        String leerSecuencia;
+
+        do {
+            System.out.print("Introduce una secuencia válida a ejecutar: ");
+            leerSecuencia = Entrada.cadena();
+        } while (!leerSecuencia.matches(ER_COMANDO));
+        return leerSecuencia;
     }
 
     public static void mostrarRobot(ControladorRobot controladorRobot) {
-
-        if (controladorRobot.getRobot() != null) {
-            System.out.println(controladorRobot.getRobot());
-        } else {
-            throw new NullPointerException("Aún no se ha creado ningún robot.");
-        }
+        System.out.println(controladorRobot.robot());
     }
 
     public static void despedirse() {

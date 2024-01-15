@@ -49,7 +49,7 @@ class ControladorRobotTest {
         Robot robot = new Robot();
         ControladorRobot controladorRobot = new ControladorRobot(robot);
         assertDoesNotThrow(robot::avanzar);
-        assertNotEquals(robot.getCoordenada(), controladorRobot.getRobot().getCoordenada());
+        assertNotEquals(robot.getCoordenada(), controladorRobot.robot().getCoordenada());
     }
 
     @Test
@@ -62,9 +62,9 @@ class ControladorRobotTest {
     void getEvitaProblemaAliasing() {
         Robot robot = new Robot();
         ControladorRobot controladorRobot = new ControladorRobot(robot);
-        Robot robotCopia = controladorRobot.getRobot();
+        Robot robotCopia = controladorRobot.robot();
         assertDoesNotThrow(robotCopia::avanzar);
-        assertNotEquals(robotCopia.getCoordenada(), controladorRobot.getRobot().getCoordenada());
+        assertNotEquals(robotCopia.getCoordenada(), controladorRobot.robot().getCoordenada());
     }
 
     @ParameterizedTest(name = "Cuando llamamos a ejecutar con el comando `{0}` llama a robot avanzar")
