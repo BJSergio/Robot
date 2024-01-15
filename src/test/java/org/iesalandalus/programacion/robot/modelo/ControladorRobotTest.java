@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ControladorRobotTest {
-
     @Mock
     static Robot robot;
     @InjectMocks
@@ -69,29 +68,29 @@ class ControladorRobotTest {
 
     @ParameterizedTest(name = "Cuando llamamos a ejecutar con el comando `{0}` llama a robot avanzar")
     @CsvSource({"A", "a"})
-    void ejecutarComandoALlamaRobotAvanzar(char comando)  {
-        assertDoesNotThrow(() -> controladorRobot.ejecutar(comando));
+    void ejecutarComandoALlamaRobotAvanzar(String comando)  {
+        assertDoesNotThrow(() -> controladorRobot.ejecutarSecuenciaComandos(comando));
         assertDoesNotThrow(() -> verify(robot).avanzar());
     }
 
     @ParameterizedTest(name = "Cuando llamamos a ejecutar con el comando `{0}` llama a robot girarALaDerecha")
     @CsvSource({"D", "d"})
-    void ejecutarComandoDLlamaRobotGirarALaDerecha(char comando)  {
-        assertDoesNotThrow(() -> controladorRobot.ejecutar(comando));
+    void ejecutarComandoDLlamaRobotGirarALaDerecha(String comando)  {
+        assertDoesNotThrow(() -> controladorRobot.ejecutarSecuenciaComandos(comando));
         verify(robot).girarALaDerecha();
     }
 
     @ParameterizedTest(name = "Cuando llamamos a ejecutar con el comando `{0}` llama a robot girarALaIzquierda")
     @CsvSource({"I", "i"})
-    void ejecutarComandoILlamaRobotGirarALaIzquierda(char comando)  {
-        assertDoesNotThrow(() -> controladorRobot.ejecutar(comando));
+    void ejecutarComandoILlamaRobotGirarALaIzquierda(String comando)  {
+        assertDoesNotThrow(() -> controladorRobot.ejecutarSecuenciaComandos(comando));
         verify(robot).girarALaIzquierda();
     }
 
     @ParameterizedTest(name = "Cuando llamamos a ejecutar con un comando no válido`{0}` lanza excepción")
     @CsvSource({"*", "4", "v", "F"})
-    void ejecutarComandoNoValidoLanzaExcepcion(char comando)  {
-        OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> controladorRobot.ejecutar(comando));
+    void ejecutarComandoNoValidoLanzaExcepcion( String comando)  {
+        OperationNotSupportedException onse = assertThrows(OperationNotSupportedException.class, () -> controladorRobot.ejecutarSecuenciaComandos(comando));
         assertEquals("Comando desconocido.", onse.getMessage());
     }
 
